@@ -2,11 +2,6 @@
  * Create a list that holds all of your cards
  */
 var cards = document.getElementsByClassName("card");
-for(var i=0;i<cards.length;i++){
-    //console.log(cards[i].innerHTML);
-}
-console.log(Array.from(cards));
-
 var openCards = [];
 var defualtMatchCards = document.getElementsByClassName("match");
 var matchedCards = Array.from(defualtMatchCards);
@@ -14,7 +9,7 @@ var movesEl = document.getElementsByClassName("moves");
 var stars = document.getElementsByClassName("stars");
 var score = 0;
 var moves = 0;
-//jQuery('#myModal').modal('hide');
+
 
 
 /*
@@ -36,9 +31,6 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
 
-    // for(var i=0;i<array.length;i++){
-    //     console.log(array[i].innerHTML);
-    // }
     return array;
 }
 
@@ -57,19 +49,18 @@ function shuffle(array) {
 
  function restartGame(){
     score = 0;
+
     cardsList = Array.from(cards);
-    console.log(cardsList);
     cardsList = cardsList.map(card => card.innerHTML);
-   cardsList = shuffle(cardsList);
-    // console.log(cardsList);
+    cardsList = shuffle(cardsList);
 
     for (var i=0; i < cards.length; i++) {
         cards[i].classList.remove("match", "open", "show");
-
         cards[i].innerHTML = cardsList[i];
-        //cards[i].classList.add("open", "show");
     }
+    
 
+    
     updateMoves(0);
     cardsList =  " ";
     
@@ -79,6 +70,9 @@ for (var i=0; i < cards.length; i++) {
     cards[i].onclick = function(){
         this.setAttribute("class", "card open show");
         moves = moves + 1;
+        if(moves === 1) {
+            setTimer();
+        }
         updateMoves(moves);
         if(openCards.length == 0){
             openCards.push(this); 
@@ -91,6 +85,7 @@ for (var i=0; i < cards.length; i++) {
 
 function updateMoves(movesCount){
     var movesEl = document.getElementsByClassName("moves");
+    moves = movesCount;
     movesEl[0].textContent = movesCount;
     if(movesCount === 1) {
         movesEl[0].nextSibling.textContent = " Move";
@@ -121,8 +116,13 @@ function matchCards(clickedCard, movesCount){
 }
 
 function checkWinStatus(){
-        if((matchedCards.length == 16) && (score >= 7)){
-            //jQuery('#myModal').modal('show');
+        var timeTaken = document.getElementsByClassName("timer")[0].innerText;
+       if((matchedCards.length == 16) && (score >= 7)){
+            clearTimer();
+            document.getElementById("rating").innerHTML = " 3 stars";
+            document.getElementById("timeTaken").innerHTML = timeTaken;
+            jQuery('#winModal').modal('show');
+            
         } else {
         
         }  
@@ -135,7 +135,6 @@ function updateRating(movesCount){
             stars[0].children[i].children[0].classList.remove("fa-star-o");
         }
     } else if(movesCount >= 21 && movesCount <= 31){
-       // stars[0].children[1].children[0].classList.remove("fa-star");
         stars[0].children[2].children[0].classList.add("fa-star-o");
         
        
@@ -145,5 +144,29 @@ function updateRating(movesCount){
     }
 }
 
+
+//Timer function from https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
+var timer;
+function setTimer(){
+    var sec = 0;
+
+    function pad(val) {
+        return val > 9 ? val : "0" + val;
+    }
+    timer = setInterval(function () {
+        document.getElementById("seconds").innerHTML = pad(++sec % 60);
+        document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
+    }, 1000);
+    
+}
+
+
+
+function clearTimer(){
+  clearInterval(timer);
+  var initialValue = 00;
+  document.getElementById("seconds").innerHTML = initialValue;
+  document.getElementById("minutes").innerHTML = initialValue;
+}
 
 

@@ -59,7 +59,7 @@ h1 {
     color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
@@ -107,3 +107,31 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.score-panel .timer {
+    float: right;
+    padding-left: 8px;
+}
+
+#winModal {
+    font-family: 'Great Vibes', cursive;
+}
+
+.modal-header, .modal-footer {
+    text-align: center;
+    border-bottom: none;
+    
+}
+
+.modal-header h4, .modal-header .close {
+    font-size: 45px;
+}
+
+.modal-body label, .modal-body span {
+    font-size: 30px;
+}
+
+.modal-footer button {
+    font-size: 45px;
+}
+
