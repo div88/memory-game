@@ -2,6 +2,8 @@
  * Create a list that holds all of your cards
  */
 var cards = document.getElementsByClassName("card");
+
+
 var openCards = [];
 var defualtMatchCards = document.getElementsByClassName("match");
 var matchedCards = Array.from(defualtMatchCards);
@@ -59,10 +61,11 @@ function shuffle(array) {
         cards[i].innerHTML = cardsList[i];
     }
     
-
-    
+    clearTimer();
     updateMoves(0);
+    updateRating(0);
     cardsList =  " ";
+    matchedCards = [];
     
  }
 
@@ -98,38 +101,46 @@ function matchCards(clickedCard, movesCount){
     var prevCard = openCards[0].lastElementChild.classList[1];
     var currentCard = clickedCard.lastElementChild.classList[1];
     if(prevCard === currentCard){
-        openCards[0].classList.remove("open", "show");
-        openCards[0].classList.add("match");
-        clickedCard.classList.remove("open", "show");
-        clickedCard.classList.add("match");
+        matchingCards(clickedCard);
         matchedCards.push(openCards[0],clickedCard);
         openCards = [];
         score = score + 1;
         updateRating(movesCount);
     } else {
-        
-        openCards[0].classList.remove("open", "show");
-        clickedCard.classList.remove("open", "show");
+        nonMatchingCards(openCards[0], clickedCard);
         openCards = [];
     }
-    checkWinStatus();
+    if((matchedCards.length == 16) && (score >= 7)){
+        onWin();
+    }  
 }
 
-function checkWinStatus(){
-        var timeTaken = document.getElementsByClassName("timer")[0].innerText;
-       if((matchedCards.length == 16) && (score >= 7)){
-            clearTimer();
-            document.getElementById("rating").innerHTML = " 3 stars";
-            document.getElementById("timeTaken").innerHTML = timeTaken;
-            jQuery('#winModal').modal('show');
-            
-        } else {
-        
-        }  
+function nonMatchingCards(prev, current){
+    setTimeout(function(){
+        prev.classList.remove("open", "show");
+        current.classList.remove("open", "show");
+    },800);
 }
 
+function matchingCards(currentCard){
+    openCards[0].classList.remove("open", "show");
+    openCards[0].classList.add("match");
+    currentCard.classList.remove("open", "show");
+    currentCard.classList.add("match");
+}
+
+//When 
+function onWin(){
+    var timeTaken = document.getElementsByClassName("timer")[0].innerText;
+    clearTimer();
+    document.getElementById("rating").innerHTML = " 3 stars";
+    document.getElementById("timeTaken").innerHTML = timeTaken;
+    jQuery('#winModal').modal('show'); 
+   
+}
+
+//To update star rating
 function updateRating(movesCount){
-    
     if(movesCount <= 20){
         for(var i=0;i<stars[0].children.length;i++){
             stars[0].children[i].children[0].classList.remove("fa-star-o");
@@ -159,7 +170,6 @@ function setTimer(){
     }, 1000);
     
 }
-
 
 
 function clearTimer(){
