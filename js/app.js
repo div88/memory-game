@@ -86,6 +86,7 @@ for (var i=0; i < cards.length; i++) {
    
 };
 
+//When 2nd card is clicked
 function updateMoves(movesCount){
     var movesEl = document.getElementsByClassName("moves");
     moves = movesCount;
@@ -97,6 +98,8 @@ function updateMoves(movesCount){
     }
 }
 
+
+//When 2nd card is clicked
 function matchCards(clickedCard, movesCount){
     var prevCard = openCards[0].lastElementChild.classList[1];
     var currentCard = clickedCard.lastElementChild.classList[1];
@@ -115,6 +118,7 @@ function matchCards(clickedCard, movesCount){
     }  
 }
 
+//When 2 open cards dont match
 function nonMatchingCards(prev, current){
     setTimeout(function(){
         prev.classList.remove("open", "show");
@@ -122,6 +126,7 @@ function nonMatchingCards(prev, current){
     },800);
 }
 
+//When 2 open cards match
 function matchingCards(currentCard){
     openCards[0].classList.remove("open", "show");
     openCards[0].classList.add("match");
@@ -129,7 +134,7 @@ function matchingCards(currentCard){
     currentCard.classList.add("match");
 }
 
-//When 
+//When all cards match and user wins
 function onWin(){
     var timeTaken = document.getElementsByClassName("timer")[0].innerText;
     clearTimer();
