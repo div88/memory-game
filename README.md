@@ -10,6 +10,8 @@ Is a memory game which lets the user click on cards and matches. It provides pla
 
 ## Walkthrough
 
+<img src="https://github.com/div88/memory-game/blob/master/memoryGame.gif" alt="memoryGame walkthrough" />
+
 ## Instructions
 
 The game randomly shuffles the cards. A user wins once all cards have successfully been matched.

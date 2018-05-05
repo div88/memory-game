@@ -113,6 +113,10 @@ h1 {
     padding-left: 8px;
 }
 
+/*
+ * Styles for the pop up modal
+ */
+
 #winModal {
     font-family: 'Great Vibes', cursive;
 }
@@ -125,6 +129,10 @@ h1 {
 
 .modal-header h4, .modal-header .close {
     font-size: 45px;
+}
+
+.modal-header img {
+    height: 32px;
 }
 
 .modal-body label, .modal-body span {
