@@ -137,8 +137,21 @@ function matchingCards(currentCard){
 //When all cards match and user wins
 function onWin(){
     var timeTaken = document.getElementsByClassName("timer")[0].innerText;
+    var starsOnWin = Array.from(stars[0].children);
+    var countStars = 0;
+    starsOnWin.map(star => {
+        if(!star.children[0].classList.contains("fa-star-o")){
+            countStars++;
+        }
+    })
+
     clearTimer();
-    document.getElementById("rating").innerHTML = " 3 stars";
+    if(countStars == 1){
+        document.getElementById("rating").innerHTML = countStars + "star";
+    } else {
+        document.getElementById("rating").innerHTML = countStars + "stars";
+    }
+    countStars = 0;
     document.getElementById("timeTaken").innerHTML = timeTaken;
     jQuery('#winModal').modal('show'); 
    
