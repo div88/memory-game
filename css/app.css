@@ -38,7 +38,8 @@ h1 {
  */
 
 .deck {
-    width: 660px;
+    width: 100%;
+    max-width: 660px;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
@@ -53,7 +54,8 @@ h1 {
 
 .deck .card {
     height: 125px;
-    width: 125px;
+    max-width: 125px;
+    width: 100%;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -141,5 +143,50 @@ h1 {
 
 .modal-footer button {
     font-size: 45px;
+}
+
+@media only screen and (min-width: 520px) and (max-width: 670px){
+    .deck {
+        width: 90%;
+        max-width: 660px;
+        
+    }
+
+    .deck .card {
+        height: 95px;
+        max-width: 95px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 519px){
+
+    .deck {
+        width: 100%;
+        max-width: 660px;
+        min-height: 420px;
+        
+    }
+
+    .deck .card {
+        height: 85px;
+        max-width: 85px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 440px){
+    .deck {
+        width: 100%;
+        max-width: 660px;
+        min-height: 420px;
+        
+    }
+
+    .deck .card {
+        height: 70px;
+        max-width: 70px;
+        width: 100%;
+    }
 }
 
